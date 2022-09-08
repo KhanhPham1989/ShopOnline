@@ -21,10 +21,16 @@ namespace Pro3_Sem3.Models
        
         [Key]
         public int Caterid { get; set; }
+        [Required]
         public string Catername { get; set; }
+        [Required]
         public string Caterpasss { get; set; }
+        [Required]
         public string Caterfullname { get; set; }
+        [Required]
         public string Cateraddress { get; set; }
+        [Required]
+        [StringLength(maximumLength:11)]
         public string Caterphone { get; set; }
         public bool Caterstatus { get; set; }
         public string Cateremail { get; set; }
@@ -32,6 +38,7 @@ namespace Pro3_Sem3.Models
         public int DistrictId { get; set; }
 
         [Required]
+        
         public int MaxPeople { get; set; }
 
 

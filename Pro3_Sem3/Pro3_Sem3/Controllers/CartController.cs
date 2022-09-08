@@ -38,7 +38,7 @@ namespace Pro3_Sem3.Controllers
        
         public IActionResult ShowRes()
         {
-            var resurl = db.Caterers.ToList();
+            var resurl = db.Caterers.Where(x=>x.Caterstatus==true).ToList();
             return View(resurl);
         }
 
@@ -58,8 +58,8 @@ namespace Pro3_Sem3.Controllers
             {
                 Caterid = resid,
                 Cusid = UserID,
-                DeliveryDate = DateTime.Today,
-                OrderDate = DateTime.Today,
+                DeliveryDate = DateTime.Now,
+                OrderDate = DateTime.Now,
                 Amount = 0,
                 Status = false,
             };
@@ -93,14 +93,6 @@ namespace Pro3_Sem3.Controllers
         //        return View(resurl);
         //}
        
-        public IActionResult UpdateQuantity(int food_id, int soluongmoi)
-        {
-            var cartlist = GetCartItems();
-            var foodfind = cartlist.Find(x => x.product.Foodid.Equals(food_id));
-              foodfind.quantity = soluongmoi;
-            SaveCartSession(cartlist);    
-            return Ok();
-        }
 
         public IActionResult DeleteItem(int food_id)
         {
@@ -157,7 +149,7 @@ namespace Pro3_Sem3.Controllers
                 cart.Add(new CartItem() { quantity = 1, product = product });
             }
             SaveCartSession(cart);
-            // Chuyển đến trang hiện thị Cart
+            
             return RedirectToAction(nameof(Cart));
         }
 
@@ -166,11 +158,11 @@ namespace Pro3_Sem3.Controllers
             return View(GetCartItems());
         }
      
-        public IActionResult Index2(Payment payment)
+        public IActionResult Index2()
         {
-           
-            
-           var products = db.Foods.Where(x => x.Caterid == payment.Caterid).ToList();
+            var payid2 = int.Parse(HttpContext.Session.GetString(payid));
+            var payid3 = db.Payments.Where(x => x.Paymentid == payid2).SingleOrDefault();
+            var products = db.Foods.Where(x => x.Caterid == payid3.Caterid && x.Foodstatus == true).ToList();
             return View("SanPham", products);
         }
 
@@ -190,7 +182,7 @@ namespace Pro3_Sem3.Controllers
             return RedirectToAction(nameof(Cart));
         }
 
-       // [Route("/updatecart", Name = "updatecart")]
+        [Route("/updatecart", Name = "updatecart")]
         [HttpPost]
         public IActionResult UpdateCart([FromForm] int productid, [FromForm] int quantity)
         {
@@ -201,25 +193,31 @@ namespace Pro3_Sem3.Controllers
                 cartitem.quantity = quantity;
             }
             SaveCartSession(cart);
-            
+
             return RedirectToAction(nameof(Cart));
         }
-        [HttpGet]
+        //[HttpGet]
+        //public IActionResult RemovePayment()
+        //{
+        //    //var UserID = int.Parse(HttpContext.Session.GetString("no"));
+        //    var payid2 = int.Parse(HttpContext.Session.GetString(payid));
+        //    var resurl = db.Payments.SingleOrDefault(x => x.Paymentid.Equals(payid2));
+
+        //    return View(resurl);
+        //}
+        [HttpPost]
         public IActionResult RemovePayment()
         {
             //var UserID = int.Parse(HttpContext.Session.GetString("no"));
             var payid2 = int.Parse(HttpContext.Session.GetString(payid));
-            var resurl = db.Payments.SingleOrDefault(x => x.Paymentid.Equals(payid2));
-
-            return View(resurl);
-        }
-        [HttpPost]
-        public IActionResult RemovePayment2()
-        {
-            //var UserID = int.Parse(HttpContext.Session.GetString("no"));
-            var payid2 = int.Parse(HttpContext.Session.GetString(payid));
-            var resurl = db.Payments.SingleOrDefault(x => x.Paymentid.Equals(payid2));
-            db.Payments.Remove(resurl);
+            var resurl = db.PaymentDetails.Where(x => x.Paymentid.Equals(payid2)).ToList();
+            var resurll = db.Payments.Where(x => x.Paymentid.Equals(payid2)).ToList();
+            foreach (var item in resurl)
+            {
+                db.PaymentDetails.Remove(item);
+            }
+            db.PaymentDetails.RemoveRange(resurl);
+            db.Payments.RemoveRange(resurll);
             db.SaveChanges();
             HttpContext.Session.Remove(payid);
             HttpContext.Session.Remove(CARTKEY);
@@ -242,47 +240,47 @@ namespace Pro3_Sem3.Controllers
         }
 
         [HttpGet]
-        public IActionResult CartPayment(CartItem cartItem,decimal Total)
+        public IActionResult CartPayment()
         {
-            PaymentDetail cart = new PaymentDetail();
-
             var payid2 = int.Parse(HttpContext.Session.GetString(payid));
             if (ModelState.IsValid)
             {
                 List<CartItem> check = GetCartItems();
                 List<PaymentDetail> details = new List<PaymentDetail>();
-                cart.Paymentid = payid2;
                 foreach (var item in check)
                 {
+                    PaymentDetail cart = new PaymentDetail();
+                    var price = db.Foods.Where(x => x.Foodid.Equals(item.product.Foodid)).SingleOrDefault();
+                    cart.Paymentid = payid2;
                     cart.Foodid = item.product.Foodid;
                     cart.Quantity = item.quantity;
-                    cart.Total = Total;
-                    // cart.Paymentid = payid2;
-
+                    cart.Total = price.Foodprice * item.quantity;
                     details.Add(cart);
-                };
-                db.PaymentDetails.AddRange(details);
+                    db.PaymentDetails.AddRange(details);
+                    
+                };            
+                check.Clear();
                 db.SaveChanges();
-                var pay = db.PaymentDetails.Where(x => x.Paymentid.Equals(payid2)).ToList();
-                //db.PaymentDetails.Add(cart);
-
-                //db.PaymentDetails.Add(cart);
-                //db.SaveChanges();
-                return View("CartPayment", pay);
+                return RedirectToAction("Thanhtoan");
             }
             else
             {
-                return View(nameof(cart));
+                return View(nameof(Cart));
             }
         }
 
+
         [HttpGet]
-        public IActionResult Thanhtoan(int id)
+        public IActionResult Thanhtoan()
         {
             var payid2 = int.Parse(HttpContext.Session.GetString(payid));
             var payid3 = db.Payments.Where(x => x.Paymentid == payid2).SingleOrDefault();
-            var total = db.PaymentDetails.SingleOrDefault(x => x.Detailsid.Equals(id));
-            payid3.Amount = total.Total;
+            var total = db.PaymentDetails.Where(x => x.Paymentid.Equals(payid3.Paymentid)).ToList();
+            foreach (var item in total)
+            {
+                payid3.Amount += item.Total;
+            }
+            
             db.Payments.Update(payid3);
             return View(payid3);
         }
@@ -292,7 +290,7 @@ namespace Pro3_Sem3.Controllers
             var payid2 = int.Parse(HttpContext.Session.GetString(payid));
 
             var payid3 = db.Payments.Where(x => x.Paymentid == payid2).SingleOrDefault();
-            List<CartItem> check = GetCartItems();
+            
             try
             {
                 if (ModelState.IsValid)
@@ -305,6 +303,8 @@ namespace Pro3_Sem3.Controllers
                     db.Payments.Update(payid3);
                     db.SaveChanges();
                     HttpContext.Session.Remove(payid);
+                    HttpContext.Session.Remove(CARTKEY);
+                    
                     return RedirectToAction("Index","Home");
                 }
                 else

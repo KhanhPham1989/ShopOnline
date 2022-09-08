@@ -1,0 +1,55 @@
+﻿@model Pro3_Sem3.Models.Payment
+
+@{
+    ViewData["Title"] = "GetPaymentDetails";
+    Layout = "~/Views/Shared/_CatererLayout.cshtml";
+}
+
+<h1>GetPaymentDetails</h1>
+
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <p>Order Date</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            <p>Delivery Date</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryDate)
+        </dd>
+        <dt class="col-sm-2">
+            <p>User Order</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cus.Username)
+        </dd>
+        <dt class="col-sm-2">
+            <p>Bill Total</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt class="col-sm-2">
+            <p>Restaurant</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cater.Caterfullname)
+        </dd>
+        <dt class="col-sm-2">
+            <p>Payment Code</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PaymentDetails)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Paymentid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

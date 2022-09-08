@@ -15,7 +15,7 @@ namespace Pro3_Sem3.Controllers
     {
         private readonly DatabaseContext db;
         private readonly Services ser;
-        private string cartUser = "cart";
+       
         public UserController(DatabaseContext _db, Services _ser)
         {
             db = _db;
@@ -109,9 +109,10 @@ namespace Pro3_Sem3.Controllers
 
         }
         [HttpGet]
-        public IActionResult Details(string UserName)
+        public IActionResult Details()
         {
-            var detail = db.Customers.Where(c => c.Username.Equals(UserName)).SingleOrDefault();
+            var UserID = int.Parse(HttpContext.Session.GetString("no")) ;
+            var detail = db.Customers.Where(c => c.Cusid.Equals(UserID)).SingleOrDefault();
             if (detail != null)
             {
                 return View(detail);
@@ -178,72 +179,49 @@ namespace Pro3_Sem3.Controllers
 
         }
 
-        //public IActionResult GetPayment(bool question)
+        public IActionResult GetPaymentDetails(int paid)
+        {
+            var result = db.Payments.Include(a => a.Cus).Include(b => b.Cater).Include(x => x.Cater.Foods).ToList();
+            var resur = result.Where(x => x.Status.Equals(paid)).ToList();
+            return View("GetPaymentDetails", resur);
+        }
+
+
+
+
+
+        //public IActionResult AddMenu(PaymentDetail newDetails) 
         //{
-        //    var resurl = db.Payments.Where(x => x.Status.Equals(question)).ToList();
-        //    ViewBag.boolen = new SelectList()
+
+        //    List<PaymentDetail> paymentDetails = new List<PaymentDetail>();
+        //    var Foodid = db.Foods.Where(p => p.Foodid.Equals(newDetails.Foodid)).SingleOrDefault();
+        //    var addproduct = paymentDetails.SingleOrDefault(x => x.Foodid.Equals(newDetails.Foodid));
+        //    if (addproduct != null && newDetails.Paymentid==addproduct.Paymentid)
+        //    {
+        //        addproduct.Quantity++;
+        //        return View("MenuDetails2");
+        //    }
+        //    PaymentDetail newpay = new PaymentDetail()
+        //    {
+        //        Paymentid = newDetails.Paymentid,
+        //        Foodid = Foodid.Foodid,
+        //        Quantity = 1,
+        //        Total = Foodid.Foodprice,
+        //    };
+        //    db.PaymentDetails.Add(newpay);
+        //    db.SaveChanges();
+        //    return View("MenuDetails2", paymentDetails);
         //}
 
-        public IActionResult SubmitPayment(Payment newPayment,int food_id) 
-        {
-            var catererID = db.Foods.SingleOrDefault(p => p.Foodid.Equals(food_id));
-            var userID = db.Customers.SingleOrDefault(c => c.Cusid.Equals(newPayment.Cusid));
-            if((newPayment.DeliveryDate.Day - newPayment.OrderDate.Day)<7)
-            {
-                Payment UserPayment = new Payment()
-                {
-                    OrderDate = newPayment.OrderDate,
-                    Cusid = userID.Cusid,
-                    Caterid = catererID.Caterid,
-                    DeliveryDate = newPayment.DeliveryDate,
-                    Amount = newPayment.Amount,
-                    Status = false,
-                    PaymentDetails = newPayment.PaymentDetails
-                };
-                db.Payments.Add(UserPayment);
-                db.SaveChanges();
-                return View();
-            }    else
-            {
-                return null;
-            }    
-           
-        }
-
-      
-
-        public IActionResult AddMenu(PaymentDetail newDetails) 
-        {
-          
-            List<PaymentDetail> paymentDetails = new List<PaymentDetail>();
-            var Foodid = db.Foods.Where(p => p.Foodid.Equals(newDetails.Foodid)).SingleOrDefault();
-            var addproduct = paymentDetails.SingleOrDefault(x => x.Foodid.Equals(newDetails.Foodid));
-            if (addproduct != null && newDetails.Paymentid==addproduct.Paymentid)
-            {
-                addproduct.Quantity++;
-                return View("MenuDetails2");
-            }
-            PaymentDetail newpay = new PaymentDetail()
-            {
-                Paymentid = newDetails.Paymentid,
-                Foodid = Foodid.Foodid,
-                Quantity = 1,
-                Total = Foodid.Foodprice,
-            };
-            db.PaymentDetails.Add(newpay);
-            db.SaveChanges();
-            return View("MenuDetails2", paymentDetails);
-        }
-
-        public PaymentDetail Get()
-        {
-            var cusID = HttpContext.Session.GetString("no");
-            if (cusID == null)
-            {
-                return null;
-            }
-            return null;
-        }
+        //public PaymentDetail Get()
+        //{
+        //    var cusID = HttpContext.Session.GetString("no");
+        //    if (cusID == null)
+        //    {
+        //        return null;
+        //    }
+        //    return null;
+        //}
 
 
     }

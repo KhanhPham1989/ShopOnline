@@ -15,20 +15,21 @@
                     @Html.DisplayNameFor(model => model.Detailsid)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Paymentid)
+                    <h4>Payment Code</h4>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Food.Foodname)
+                    <h4> Your choice</h4>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
+                    <h4>Quantity</h4>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Food.Foodprice)
+                    <h4>Price Details</h4>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Total)
+                    <h4>Total Payment</h4>
                 </th>
+
                 <th></th>
             </tr>
         </thead>
@@ -53,16 +54,20 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Food.Foodprice)
                     </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Total)
-                    </td>*@
                     <td>
-                        <button type="submit" asp-action="Thanhtoan" asp-controller="Cart" asp-route-id="@item.Detailsid">Accept Payment</button> |
-                        <a asp-action="Details" asp-route-id="@item.Detailsid">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Detailsid">Delete</a>
+                        @Html.DisplayFor(modelItem => item.Total)
                     </td>
+
                 </tr>
             }
+
         </tbody>
     </table>
+    <div>
+        <button type="submit" asp-action="Thanhtoan" asp-controller="Cart">Accept Payment</button> |
+        <button type="submit" asp-action="RemovePayment" asp-controller="Cart" >Remove Payment</button> |
+        @*<a asp-action="Details" asp-route-id="@item.Detailsid">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Detailsid">Delete</a>*@
+    </div>
 </form>
+

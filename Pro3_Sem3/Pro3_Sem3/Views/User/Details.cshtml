@@ -67,8 +67,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="EditInfomation" asp-route-id="@Model.Cusid">Edit</a> |
-    <a asp-action="Logout" asp-controller="User" asp-route-id="@Model.Cusid">Logout</a> |
+    <a asp-action="EditInfomation" asp-route-id="@Model.Cusid">Change Information</a> 
+    <a asp-action="Logout" asp-controller="User" asp-route-id="@Model.Cusid">Logout</a> 
+    <a asp-action="GetAllPayment" asp-controller="User" asp-route-id="@Model.Cusid">Get All Payment</a> 
     <a asp-action="ShowCart" asp-controller="User" asp-route-id="@Model.Cusid">Cart 's @Model.Cusfullname</a> |
     <a asp-action="Index">Back to List</a>
 </div>

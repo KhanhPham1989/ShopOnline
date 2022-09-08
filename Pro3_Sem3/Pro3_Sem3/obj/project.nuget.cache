@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4Aa3ojCe4EqH93Zk0n+88HepqXOYd9FevFsXLcWxQgstZx3SXB2iXby4bQgtcNaW3YGjAzWP2CUsPJVYwczvSg==",
+  "dgSpecHash": "uUvt5j2WuUgpqrA3fAShSNlRVvRjtIln1pcwP+y6Xb6BPRcvm9SejPff3edgDtxX+AHH6MgPcTAd3sItil60FQ==",
   "success": true,
-  "projectFilePath": "D:\\Apteach2\\ShopOnline\\Project_Sem3_Final\\Pro3_Sem3\\ShopOnline\\Project_Sem3_Final\\Pro3_Sem3\\Pro3_Sem3\\Pro3_Sem3.csproj",
+  "projectFilePath": "C:\\Users\\Khanh\\Desktop\\IT\\ShopOnline\\Pro3_Sem3\\Pro3_Sem3\\Pro3_Sem3.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Khanh\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Khanh\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

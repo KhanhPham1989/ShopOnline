@@ -9024,11 +9024,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Apteach2\\ShopOnline\\Project_Sem3_Final\\Pro3_Sem3\\ShopOnline\\Project_Sem3_Final\\Pro3_Sem3\\Pro3_Sem3\\Pro3_Sem3.csproj",
+      "projectUniqueName": "C:\\Users\\Khanh\\Desktop\\IT\\ShopOnline\\Pro3_Sem3\\Pro3_Sem3\\Pro3_Sem3.csproj",
       "projectName": "Pro3_Sem3",
-      "projectPath": "D:\\Apteach2\\ShopOnline\\Project_Sem3_Final\\Pro3_Sem3\\ShopOnline\\Project_Sem3_Final\\Pro3_Sem3\\Pro3_Sem3\\Pro3_Sem3.csproj",
+      "projectPath": "C:\\Users\\Khanh\\Desktop\\IT\\ShopOnline\\Pro3_Sem3\\Pro3_Sem3\\Pro3_Sem3.csproj",
       "packagesPath": "C:\\Users\\Khanh\\.nuget\\packages\\",
-      "outputPath": "D:\\Apteach2\\ShopOnline\\Project_Sem3_Final\\Pro3_Sem3\\ShopOnline\\Project_Sem3_Final\\Pro3_Sem3\\Pro3_Sem3\\obj\\",
+      "outputPath": "C:\\Users\\Khanh\\Desktop\\IT\\ShopOnline\\Pro3_Sem3\\Pro3_Sem3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Khanh\\AppData\\Roaming\\NuGet\\NuGet.Config",

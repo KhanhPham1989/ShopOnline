@@ -1,0 +1,74 @@
+﻿@model Pro3_Sem3.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Model.Username Information</h1>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2" hidden>
+            @Html.DisplayNameFor(model => model.Cusid)
+        </dt>
+        <dd class="col-sm-10" hidden accesskey="id">
+            @Html.DisplayFor(model => model.Cusid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt class="col-sm-2" hidden>
+            @Html.DisplayNameFor(model => model.Userpass)
+        </dt>
+        <dd class="col-sm-10" hidden>
+            @Html.DisplayFor(model => model.Userpass)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cusphone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cusphone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cusaddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cusaddress)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cusfullname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cusfullname)
+        </dd>
+        <dt class="col-sm-2" hidden>
+            @Html.DisplayNameFor(model => model.Cusstatus)
+        </dt>
+        <dd class="col-sm-10" hidden>
+            @Html.DisplayFor(model => model.Cusstatus)
+        </dd>
+        <dt class="col-sm-2" hidden>
+            @Html.DisplayNameFor(model => model.Admin)
+        </dt>
+        <dd class="col-sm-10" hidden>
+            @Html.DisplayFor(model => model.Admin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cusemail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cusemail)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditInfomation" asp-route-id="@Model.Cusid">Edit</a> |
+    <a asp-action="Logout" asp-controller="User" asp-route-id="@Model.Cusid">Logout</a> |
+    <a asp-action="ShowCart" asp-controller="User" asp-route-id="@Model.Cusid">Cart 's @Model.Cusfullname</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

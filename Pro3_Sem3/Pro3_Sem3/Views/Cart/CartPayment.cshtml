@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Pro3_Sem3.Models.PaymentDetail>
+
+@{
+    ViewData["Title"] = "CartPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CartPayment</h1>
+
+<form action="Thanhtoan" method="post" enctype="multipart/form-data">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Detailsid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Paymentid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Food.Foodname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Food.Foodprice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span asp-validation-for="@item.Detailsid">  </span>
+                        @Html.DisplayFor(modelItem => item.Detailsid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Paymentid)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Foodid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Food.Foodprice)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>*@
+                    <td>
+                        <button type="submit" asp-action="Thanhtoan" asp-controller="Cart" asp-route-id="@item.Detailsid">Accept Payment</button> |
+                        <a asp-action="Details" asp-route-id="@item.Detailsid">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Detailsid">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

@@ -1,0 +1,67 @@
+﻿@model Pro3_Sem3.Models.Caterer
+
+@{
+    ViewData["Title"] = "LoginRes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>LoginRes</h1>
+
+<h4>Caterer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LoginRes">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Catername" class="control-label"></label>
+                <input asp-for="Catername" name="UserName" class="form-control" />
+                <span asp-validation-for="Catername" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Caterpasss" class="control-label"></label>
+                <input asp-for="Caterpasss" name="pass" class="form-control" />
+                <span asp-validation-for="Caterpasss" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Caterfullname" class="control-label"></label>
+                <input asp-for="Caterfullname" class="form-control" />
+                <span asp-validation-for="Caterfullname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cateraddress" class="control-label"></label>
+                <input asp-for="Cateraddress" class="form-control" />
+                <span asp-validation-for="Cateraddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Caterphone" class="control-label"></label>
+                <input asp-for="Caterphone" class="form-control" />
+                <span asp-validation-for="Caterphone" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Caterstatus" /> @Html.DisplayNameFor(model => model.Caterstatus)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cateremail" class="control-label"></label>
+                <input asp-for="Cateremail" class="form-control" />
+                <span asp-validation-for="Cateremail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>*@
+        <div class="form-group">
+            <button type="submit" asp-action="LoginRes" asp-controller="Caterer" value="Login" class="btn btn-primary">Login</button>
+            <a type="submit" asp-action="Register" asp-controller="Caterer" class="btn btn-primary">Register</a>
+        </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

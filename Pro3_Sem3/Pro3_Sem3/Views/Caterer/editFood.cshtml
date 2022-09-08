@@ -1,0 +1,58 @@
+﻿@model Pro3_Sem3.Models.Food
+
+@{
+    ViewData["Title"] = "editFood";
+    Layout = "~/Views/Shared/_CatererLayout.cshtml";
+}
+
+<h1>Edit Food</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="editFood" asp-controller="Caterer" asp-route-id="@Model.Foodid" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Foodid" />
+            <div class="form-group">
+                <label asp-for="Foodname" class="control-label"></label>
+                <input asp-for="Foodname" class="form-control" />
+                <span asp-validation-for="Foodname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <label>Image</label>
+                        <input type="file" accept="image/*" asp-for="PhotoUpload" name="photoUpload" id="Image" class="form-control" style="display:none" />
+                        <input type="button" class="btn-info" value="Choose Image" id="chooseImg" />
+                    </div>
+                    <div class="col-6">
+                        <div style="width:100px;height:100px"><img id="blah" src="@("~/images/"+Model.Foodimage)" asp-append-version="true" style="width:100%;height:100%;" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foodstatus" class="control-label"></label>
+                <input asp-for="Foodstatus" class="form-control" />
+                <span asp-validation-for="Foodstatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foodprice" class="control-label"></label>
+                <input asp-for="Foodprice" class="form-control" />
+                <span asp-validation-for="Foodprice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fooddescription" class="control-label"></label>
+                <input asp-for="Fooddescription" class="form-control" />
+                <span asp-validation-for="Fooddescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="FoodListOfRestaurant" asp-controller="Caterer">Back to List</a>
+</div>
+

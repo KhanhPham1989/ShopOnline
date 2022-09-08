@@ -1,0 +1,86 @@
+﻿@model Pro3_Sem3.Models.CatererFoods
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Name Caterer</label>
+                <input class="form-control" value="@Model.CaterersN.Catername" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Address</label>
+                <input class="form-control" value="@Model.CaterersN.Cateraddress" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Describe</label>
+                <input class="form-control" value="@Model.CaterersN.Caterstatus" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Photo</label>
+                <input class="form-control" value="@Model.CaterersN.Caterphone" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone</label>
+                <input class="form-control" value="@Model.CaterersN.Photo" />
+
+            </div>
+            @*<div class="form-group">
+                <label class="control-label">Dilivery Date</label>
+                <input class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Dilivery Address</label>
+                <input class="form-control" />
+
+            </div>*@
+            @*<div class="form-group">
+                <input type="submit" value="Create Order" class="btn btn-primary" />
+            </div>*@
+        </form>
+
+        <div class="btn btn-primary">
+            <a href='@Url.Action("ShowPaymentBeforeGetFood", "Cart",new { resid = Model.CaterersN.Caterid })'>
+                Create order
+            </a>
+            
+        </div>
+    </div>
+</div>
+<div class="features_items">
+    <!--features_items-->
+    <h2 class="title text-center">Foods</h2>
+
+ 
+        @foreach (var item in Model.FoodList)
+        {
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <a href=''>
+                                <img src="~/images/food/@item.Foodimage" alt="" style="max-width:100%" />
+
+
+
+                            </a>
+                            <h2>sdadsadsa+@item.Foodname</h2>
+                        </div>
+                    </div>
+                    <div class="choose">
+
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+
+</div>
+<!--San pham moi-->

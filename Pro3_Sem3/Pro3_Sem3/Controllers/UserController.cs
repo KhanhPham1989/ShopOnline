@@ -159,12 +159,16 @@ namespace Pro3_Sem3.Controllers
             return View("EditInfomation");
         }
 
-        public IActionResult Delete(int? id) // cus
+        public IActionResult DeletePayment(int paid) 
         {
-            var delete = db.Customers.Find(id);
-            db.Customers.Remove(delete);
+            var delete = db.PaymentDetails.Where(x=> x.Paymentid == paid).ToList();
+            
+            db.PaymentDetails.RemoveRange(delete);
             db.SaveChanges();
-            return RedirectToAction("Login");
+            var dele = db.Payments.Where(x => x.Paymentid == paid).SingleOrDefault();
+            db.Payments.Remove(dele);
+            db.SaveChanges();
+            return RedirectToAction(nameof(GetAllPayment));
         }
 
         public IActionResult GetAllPayment()
@@ -173,55 +177,27 @@ namespace Pro3_Sem3.Controllers
             {
                 return RedirectToAction("Login");
             }
-            string s = HttpContext.Session.GetString("no");
-            var result = db.Payments.Include(a => a.Cus).Include(b => b.Cater).Include(x => x.Cater.Foods).ToList();
+            var s = int.Parse(HttpContext.Session.GetString("no")) ;
+            var result = db.Payments.Where(x=> x.Cusid==s).ToList();
             return View(result);
 
         }
 
         public IActionResult GetPaymentDetails(int paid)
         {
-            var result = db.Payments.Include(a => a.Cus).Include(b => b.Cater).Include(x => x.Cater.Foods).ToList();
-            var resur = result.Where(x => x.Status.Equals(paid)).ToList();
-            return View("GetPaymentDetails", resur);
+            var result = db.Payments.Include(a => a.Cus).Include(b => b.PaymentDetails).Include(x => x.Cater).
+                Include(x => x.Cater.Foods).ToList();
+
+           // var res = db.Payments.
+            var resur = result.Where(x => x.Paymentid.Equals(paid)).ToList();
+            return View("GetPaymentDetails", result);
         }
 
 
 
 
 
-        //public IActionResult AddMenu(PaymentDetail newDetails) 
-        //{
-
-        //    List<PaymentDetail> paymentDetails = new List<PaymentDetail>();
-        //    var Foodid = db.Foods.Where(p => p.Foodid.Equals(newDetails.Foodid)).SingleOrDefault();
-        //    var addproduct = paymentDetails.SingleOrDefault(x => x.Foodid.Equals(newDetails.Foodid));
-        //    if (addproduct != null && newDetails.Paymentid==addproduct.Paymentid)
-        //    {
-        //        addproduct.Quantity++;
-        //        return View("MenuDetails2");
-        //    }
-        //    PaymentDetail newpay = new PaymentDetail()
-        //    {
-        //        Paymentid = newDetails.Paymentid,
-        //        Foodid = Foodid.Foodid,
-        //        Quantity = 1,
-        //        Total = Foodid.Foodprice,
-        //    };
-        //    db.PaymentDetails.Add(newpay);
-        //    db.SaveChanges();
-        //    return View("MenuDetails2", paymentDetails);
-        //}
-
-        //public PaymentDetail Get()
-        //{
-        //    var cusID = HttpContext.Session.GetString("no");
-        //    if (cusID == null)
-        //    {
-        //        return null;
-        //    }
-        //    return null;
-        //}
+        
 
 
     }

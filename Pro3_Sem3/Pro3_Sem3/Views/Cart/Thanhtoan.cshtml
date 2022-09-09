@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_CatererLayout.cshtml";
 }
 
-<h1>Thanhtoan</h1>
+<h1>Payment</h1>
 
-<h4>Payment</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,10 +21,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Cusid" class="control-label"></label>
-                <input readonly asp-for="Cusid" class="form-control"  />ViewBag.name
+                <input readonly asp-for="Cusid" class="form-control" />@ViewBag.name
                 <span asp-validation-for="Cusid" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group">
+                <label asp-for="Orderaddress" class="control-label">Order Address:</label>
+                <input  asp-for="Orderaddress" class="form-control" />
+                <span asp-validation-for="Orderaddress" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check" hidden>
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
                 </label>
@@ -39,9 +44,9 @@
                 <input asp-for="DeliveryDate" class="form-control" />
                 <span asp-validation-for="DeliveryDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <label asp-for="Caterid" class="control-label"></label>
-                <input readonly asp-for="Caterid" class="form-control"/>@ViewBag.Caterid
+                <input readonly asp-for="Caterid" class="form-control" />@ViewBag.Caterid
                 <span asp-validation-for="Caterid" class="text-danger"></span>
             </div>
             <div class="form-group">

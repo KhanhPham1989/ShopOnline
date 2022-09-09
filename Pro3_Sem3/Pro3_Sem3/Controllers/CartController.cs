@@ -58,11 +58,16 @@ namespace Pro3_Sem3.Controllers
             {
                 Caterid = resid,
                 Cusid = UserID,
-                DeliveryDate = DateTime.Now,
-                OrderDate = DateTime.Now,
+                OrderDate = DateTime.Today,
+                DeliveryDate = DateTime.Today.AddDays(7),
                 Amount = 0,
                 Status = false,
+                Orderaddress = null,
             };
+            if(pay.DeliveryDate < DateTime.Today.AddDays(7))
+            {
+                ViewBag.sms = "Delivery Date must be over than 7 days.";
+            }
             var resname = db.Caterers.SingleOrDefault(x => x.Caterid == resid);
             ViewBag.data = resname.Caterfullname;
             return View("page3", pay);
@@ -274,6 +279,7 @@ namespace Pro3_Sem3.Controllers
         public IActionResult Thanhtoan()
         {
             var payid2 = int.Parse(HttpContext.Session.GetString(payid));
+            ViewBag.name = HttpContext.Session.GetString("UserName");
             var payid3 = db.Payments.Where(x => x.Paymentid == payid2).SingleOrDefault();
             var total = db.PaymentDetails.Where(x => x.Paymentid.Equals(payid3.Paymentid)).ToList();
             foreach (var item in total)
@@ -299,6 +305,7 @@ namespace Pro3_Sem3.Controllers
                     payid3.DeliveryDate = final.DeliveryDate;
                     payid3.Amount = final.Amount;
                     payid3.Status = true;
+                    payid3.Orderaddress = final.Orderaddress;
                     ViewBag.msg = "Update Success";
                     db.Payments.Update(payid3);
                     db.SaveChanges();

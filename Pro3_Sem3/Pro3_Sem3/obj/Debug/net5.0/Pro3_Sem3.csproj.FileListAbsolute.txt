@@ -981,7 +981,6 @@ C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Cart\SanPham.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Cart\ShowCart.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Cart\ShowFood.cshtml.g.cs
-C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Cart\ShowRes.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Cart\Thanhtoan.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Caterer\createFood.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Caterer\createWorker.cshtml.g.cs
@@ -1017,5 +1016,5 @@ C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Pro3_S
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\ref\Pro3_Sem3.dll
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Pro3_Sem3.pdb
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Pro3_Sem3.genruntimeconfig.cache
-C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\GetPaymentDetails.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Pro3_Sem3.csproj.AssemblyReference.cache
+C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\GetPaymentDetails.cshtml.g.cs

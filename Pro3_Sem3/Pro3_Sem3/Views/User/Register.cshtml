@@ -13,27 +13,27 @@
         <form asp-action="Register" name="id">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
+                <label asp-for="Username" class="control-label">Your Account</label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Userpass" class="control-label"></label>
+                <label asp-for="Userpass" class="control-label">Your Password</label>
                 <input asp-for="Userpass" class="form-control" />
                 <span asp-validation-for="Userpass" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cusphone" class="control-label"></label>
+                <label asp-for="Cusphone" class="control-label">Your Phone</label>
                 <input asp-for="Cusphone" class="form-control" />
                 <span asp-validation-for="Cusphone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cusaddress" class="control-label"></label>
+                <label asp-for="Cusaddress" class="control-label">Your Address</label>
                 <input asp-for="Cusaddress" class="form-control" />
                 <span asp-validation-for="Cusaddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cusfullname" class="control-label"></label>
+                <label asp-for="Cusfullname" class="control-label">Your FullName</label>
                 <input asp-for="Cusfullname" class="form-control" />
                 <span asp-validation-for="Cusfullname" class="text-danger"></span>
             </div>
@@ -48,13 +48,13 @@
                 </label>
             </div>*@
             <div class="form-group">
-                <label asp-for="Cusemail" class="control-label"></label>
+                <label  class="control-label">Your Email </label>
                 <input asp-for="Cusemail" class="form-control" />
                 <span asp-validation-for="Cusemail" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" asp-action="Register" value="Create" class="btn btn-primary" />
-                <input type="reset" name="reset" value="Reset" action="" />
+                <input type="reset" name="reset" value="Reset"  class="btn btn-primary" />
             </div>
         </form>
     </div>

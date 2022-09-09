@@ -196,6 +196,11 @@ namespace Pro3_Sem3.Models
                 entity.Property(e => e.Caterid).HasColumnName("caterid");
 
                 entity.Property(e => e.Cusid).HasColumnName("cusid");
+                entity.Property(e => e.Orderaddress)
+                    .IsRequired(false)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("orderaddress");
 
                 entity.Property(e => e.DeliveryDate)
                     .HasColumnType("date")

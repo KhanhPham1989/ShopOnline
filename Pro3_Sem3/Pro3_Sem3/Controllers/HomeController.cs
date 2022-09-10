@@ -20,6 +20,19 @@ namespace Pro3_Sem3.Controllers
             db = _db;
         }
 
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+        public IActionResult ThankYou()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             var district = db.Districts.ToList();
@@ -27,7 +40,8 @@ namespace Pro3_Sem3.Controllers
             var viewHomeT = new List<ViewHome>();
             if (HttpContext.Session.GetString("no") == null)
             {
-                var caterern = db.Caterers.ToList();
+                var caterern = db.Caterers.Where(a => a.Caterstatus == true).ToList();
+
                 foreach (var item in caterern)
                 {
                     var viewHome = new ViewHome();
@@ -41,9 +55,9 @@ namespace Pro3_Sem3.Controllers
             else
             {
                 var id = int.Parse(HttpContext.Session.GetString("no"));
-                var caterern = db.Caterers.ToList();
+                var caterern = db.Caterers.Where(a => a.Caterstatus == true).ToList();
                 var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                ViewBag.wlcount = wl.Count();
 
 
                 foreach (var item in caterern)
@@ -79,7 +93,7 @@ namespace Pro3_Sem3.Controllers
             {
                 if (HttpContext.Session.GetString("no") == null)
                 {
-                    var caterern = db.Caterers.ToList();
+                    var caterern = db.Caterers.Where(a => a.Caterstatus == true).ToList();
 
                     foreach (var item in caterern)
                     {
@@ -94,10 +108,10 @@ namespace Pro3_Sem3.Controllers
                 else
                 {
                     var id = int.Parse(HttpContext.Session.GetString("no"));
-                    var caterern = db.Caterers.ToList();
+                    var caterern = db.Caterers.Where(a => a.Caterstatus == true).ToList();
 
                     var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                    ViewBag.wlcount = wl.Count();
 
 
                     foreach (var item in caterern)
@@ -123,7 +137,7 @@ namespace Pro3_Sem3.Controllers
             {
                 if (HttpContext.Session.GetString("no") == null)
                 {
-                    var caterern = db.Caterers.Where(a => a.DistrictId.Equals(address) && a.Caterfullname.Contains(name) && a.MaxPeople > people).ToList();
+                    var caterern = db.Caterers.Where(a => a.DistrictId.Equals(address) && a.Caterfullname.Contains(name) && a.MaxPeople > people && a.Caterstatus==true).ToList();
                     foreach (var item in caterern)
                     {
                         var viewHome = new ViewHome();
@@ -137,11 +151,11 @@ namespace Pro3_Sem3.Controllers
                 else
                 {
                     var id = int.Parse(HttpContext.Session.GetString("no"));
-                    var caterern = db.Caterers.Where(a => a.DistrictId.Equals(address) && a.Caterfullname.Contains(name) && a.MaxPeople > people).ToList();
+                    var caterern = db.Caterers.Where(a => a.DistrictId.Equals(address) && a.Caterfullname.Contains(name) && a.MaxPeople > people && a.Caterstatus == true).ToList();
 
 
                     var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                    ViewBag.wlcount = wl.Count();
 
 
                     foreach (var item in caterern)
@@ -167,7 +181,7 @@ namespace Pro3_Sem3.Controllers
             {
                 if (HttpContext.Session.GetString("no") == null)
                 {
-                    var caterern = db.Caterers.Where(a => a.DistrictId.Equals(address)).ToList();
+                    var caterern = db.Caterers.Where(a => a.DistrictId.Equals(address) && a.Caterstatus == true).ToList();
                     foreach (var item in caterern)
                     {
                         var viewHome = new ViewHome();
@@ -181,10 +195,10 @@ namespace Pro3_Sem3.Controllers
                 else
                 {
                     var id = int.Parse(HttpContext.Session.GetString("no"));
-                    var caterern = db.Caterers.Where(a => a.DistrictId.Equals(address)).ToList();
+                    var caterern = db.Caterers.Where(a => a.DistrictId.Equals(address) && a.Caterstatus == true).ToList();
 
                     var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                    ViewBag.wlcount = wl.Count();
 
 
                     foreach (var item in caterern)
@@ -211,7 +225,7 @@ namespace Pro3_Sem3.Controllers
             {
                 if (HttpContext.Session.GetString("no") == null)
                 {
-                    var caterern = db.Caterers.Where(a => a.Caterfullname.Contains(name)).ToList();
+                    var caterern = db.Caterers.Where(a => a.Caterfullname.Contains(name) && a.Caterstatus == true).ToList();
                     foreach (var item in caterern)
                     {
                         var viewHome = new ViewHome();
@@ -225,10 +239,10 @@ namespace Pro3_Sem3.Controllers
                 else
                 {
                     var id = int.Parse(HttpContext.Session.GetString("no"));
-                    var caterern = db.Caterers.Where(a => a.Caterfullname.Contains(name)).ToList();
+                    var caterern = db.Caterers.Where(a => a.Caterfullname.Contains(name) && a.Caterstatus == true).ToList();
 
                     var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                    ViewBag.wlcount = wl.Count();
 
 
                     foreach (var item in caterern)
@@ -253,7 +267,7 @@ namespace Pro3_Sem3.Controllers
             {
                 if (HttpContext.Session.GetString("no") == null)
                 {
-                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people).ToList();
+                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.Caterstatus == true).ToList();
                     foreach (var item in caterern)
                     {
                         var viewHome = new ViewHome();
@@ -267,10 +281,10 @@ namespace Pro3_Sem3.Controllers
                 else
                 {
                     var id = int.Parse(HttpContext.Session.GetString("no"));
-                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people).ToList();
+                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.Caterstatus == true).ToList();
 
                     var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                    ViewBag.wlcount = wl.Count();
 
 
                     foreach (var item in caterern)
@@ -295,7 +309,7 @@ namespace Pro3_Sem3.Controllers
             {
                 if (HttpContext.Session.GetString("no") == null)
                 {
-                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.Caterfullname.Contains(name)).ToList();
+                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.Caterfullname.Contains(name) && a.Caterstatus == true).ToList();
                     foreach (var item in caterern)
                     {
                         var viewHome = new ViewHome();
@@ -309,10 +323,10 @@ namespace Pro3_Sem3.Controllers
                 else
                 {
                     var id = int.Parse(HttpContext.Session.GetString("no"));
-                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.Caterfullname.Contains(name)).ToList();
+                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.Caterfullname.Contains(name) && a.Caterstatus == true).ToList();
 
                     var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                    ViewBag.wlcount = wl.Count();
 
 
                     foreach (var item in caterern)
@@ -338,7 +352,7 @@ namespace Pro3_Sem3.Controllers
             {
                 if (HttpContext.Session.GetString("no") == null)
                 {
-                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.DistrictId.Equals(address)).ToList();
+                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.DistrictId.Equals(address) && a.Caterstatus == true).ToList();
                     foreach (var item in caterern)
                     {
                         var viewHome = new ViewHome();
@@ -352,10 +366,10 @@ namespace Pro3_Sem3.Controllers
                 else
                 {
                     var id = int.Parse(HttpContext.Session.GetString("no"));
-                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.DistrictId.Equals(address)).ToList();
+                    var caterern = db.Caterers.Where(a => a.MaxPeople >= people && a.DistrictId.Equals(address) && a.Caterstatus == true).ToList();
 
                     var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                    ViewBag.wlcount = wl.Count();
 
 
                     foreach (var item in caterern)
@@ -381,7 +395,7 @@ namespace Pro3_Sem3.Controllers
             {
                 if (HttpContext.Session.GetString("no") == null)
                 {
-                    var caterern = db.Caterers.Where(a => a.Caterfullname.Contains(name) && a.DistrictId.Equals(address)).ToList();
+                    var caterern = db.Caterers.Where(a => a.Caterfullname.Contains(name) && a.DistrictId.Equals(address) && a.Caterstatus == true).ToList();
                     foreach (var item in caterern)
                     {
                         var viewHome = new ViewHome();
@@ -395,10 +409,10 @@ namespace Pro3_Sem3.Controllers
                 else
                 {
                     var id = int.Parse(HttpContext.Session.GetString("no"));
-                    var caterern = db.Caterers.Where(a => a.Caterfullname.Contains(name) && a.DistrictId.Equals(address)).ToList();
+                    var caterern = db.Caterers.Where(a => a.Caterfullname.Contains(name) && a.DistrictId.Equals(address) && a.Caterstatus == true).ToList();
 
                     var wl = db.Wishlists.Where(a => a.Cusid == id).ToList();
-
+                    ViewBag.wlcount = wl.Count();
 
 
                     foreach (var item in caterern)
@@ -461,6 +475,14 @@ namespace Pro3_Sem3.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult RemoveWishListN(int id)
+        {
+            int idc = int.Parse(HttpContext.Session.GetString("no"));
+            var wl = db.Wishlists.Where(a => a.Caterid == id && a.Cusid == idc).FirstOrDefault();
+            db.Wishlists.Remove(wl);
+            db.SaveChanges();
+            return RedirectToAction("WishList");
+        }
 
         public IActionResult AddWishList(int id)
         {
@@ -471,52 +493,6 @@ namespace Pro3_Sem3.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        //[HttpGet]
-        //public IActionResult LoginCustomer()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult LoginCustomer(string no, string pin)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            Customer customer = db.Customers.SingleOrDefault(a => a.Username.Equals(no) && a.Userpass.Equals(pin));
-
-
-
-        //            if (customer != null)
-        //            {
-        //                //secction
-        //                HttpContext.Session.SetString("customerID", customer.Cusid.ToString());
-        //                HttpContext.Session.SetString("customerName", customer.Username.ToString());
-        //                return RedirectToAction("Index");
-        //            }
-        //            else
-        //            {
-        //                return RedirectToAction("LoginCustomer");
-
-        //            }
-
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError(string.Empty, "Fail!!!");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        //ViewBag.msg = ex.Message;
-        //        ModelState.AddModelError(string.Empty, ex.Message);
-
-        //    }
-        //    return View();
-        //}
 
         public IActionResult Logout()
         {
@@ -537,7 +513,7 @@ namespace Pro3_Sem3.Controllers
         public IActionResult DetailsCaterer(int id)
         {
             var caterer = db.Caterers.Find(id);
-            var food = db.Foods.Where(a => a.Caterid.Equals(id)).ToList();
+            var food = db.Foods.Where(a => a.Caterid.Equals(id) && a.Foodstatus== true).ToList();
             var details = new CatererFoods();
             details.CaterersN = caterer;
             details.FoodList = food;

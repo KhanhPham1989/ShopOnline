@@ -10,12 +10,12 @@
                 <div class="single-products">
                     <div class="productinfo text-center">
                         <a href='@Url.Action("DetailsCaterer", "Home",new { id = item.CaterersN.Caterid })'>
-                            <img src="~/images/caterer/@item.CaterersN.Photo" alt="" style="max-width:100%" />
+                            <img src="~/images/caterer/@item.CaterersN.Photo" alt="" style="max-width: 100%; border-radius: 5%" />
 
 
                             <h2>@item.CaterersN.Caterfullname</h2>
 
-                            <p>@item.CaterersN.Cateraddress</p>
+                            <p>@item.CaterersN.Caterphone</p>
                         </a>
 
                     </div>
@@ -80,23 +80,22 @@
                             </select>
                         </div>
                         <br />
-                        <div class="col-sm-12" style="margin:10px">
+                        @*<div class="col-sm-12" style="margin:10px">
                             <label>Vegetarian </label>
                             <input type="checkbox" id="V" name="V" value="V">
 
-                        </div>
+                        </div>*@
                         <br />
                         <div class="col-sm-12" style="margin:10px">
                             <label>amount of people </label>
                             <select name="people">
                                 <option>--All--</option>
                                 <option>50</option>
-                                <option>60</option>
-                                <option>70</option>
-                                <option>80</option>
-                                <option>90</option>
                                 <option>100</option>
-                                <option value="101">>100</option>
+                                <option>150</option>
+                                <option>200</option>
+                                <option>250</option>
+                                <option value="251">250</option>
                             </select>
                             <br />
                         </div>

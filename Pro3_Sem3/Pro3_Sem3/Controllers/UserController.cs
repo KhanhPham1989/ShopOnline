@@ -185,12 +185,15 @@ namespace Pro3_Sem3.Controllers
 
         public IActionResult GetPaymentDetails(int paid)
         {
-            var result = db.Payments.Include(a => a.Cus).Include(b => b.PaymentDetails).Include(x => x.Cater).
-                Include(x => x.Cater.Foods).ToList();
-
-           // var res = db.Payments.
-            var resur = result.Where(x => x.Paymentid.Equals(paid)).ToList();
-            return View("GetPaymentDetails", result);
+            var findInDetails = db.PaymentDetails.Where(x => x.Paymentid == paid).ToList();
+            List<Food> getFood = new List<Food>();
+            foreach (var item in findInDetails)
+            {
+                ViewBag.quan = item.Quantity;
+                var food = db.Foods.Where(f => f.Foodid == item.Foodid).SingleOrDefault();
+                getFood.Add(food);
+            }
+            return View("GetPaymentDetails",getFood);
         }
 
 

@@ -36,8 +36,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href='@Url.Action("ShowRes", "Cart")'>
-                                        <i class="fa fa-shopping-cart"></i> Cart
+                                    <a href='@Url.Action("GetAllPayment", "Caterer")'>
+                                        <i class="fa fa-shopping-cart"></i> Manage Orders
                                     </a>
                                 </li>
                                 @using Microsoft.AspNetCore.Http
@@ -67,7 +67,7 @@
                                             <b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu extended logout">
-                                            <li><a href=''> Account</a></li>
+                                            <li><a  href='@Url.Action("EditCaterer", "Caterer" )'> Account</a></li>
                                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Caterer" asp-action="Logout">Logout</a></li>
                                         </ul>
                                     </li>

@@ -9,13 +9,13 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <a href=''>
-                            <img src="~/image/caterer/@item.CaterersN.Photo" alt="" style="max-width:100%" />
+                        <a href='@Url.Action("DetailsCaterer", "Home",new { id = item.CaterersN.Caterid })'>
+                            <img src="~/images/caterer/@item.CaterersN.Photo" alt="" style="max-width: 100%; border-radius: 5%" />
 
 
-                            <h2>@item.CaterersN.Catername</h2>
+                            <h2>@item.CaterersN.Caterfullname</h2>
 
-                            <p>@item.CaterersN.Cateraddress</p>
+                            <p>@item.CaterersN.Caterphone</p>
                         </a>
 
                     </div>
@@ -24,7 +24,7 @@
                     <ul class="nav nav-pills nav-justified">
                         @if (@item.wishlist)
                         {
-                            <li><a href='@Url.Action("RemoveWishList", "Home",new { id = item.CaterersN.Caterid })' class="wishlist"><i class="fa fa-plus-square"></i>Remove to WishList</a></li>
+                            <li><a href='@Url.Action("RemoveWishListN", "Home",new { id = item.CaterersN.Caterid })' class="wishlist"><i class="fa fa-plus-square"></i>Remove to WishList</a></li>
                         }
                         else
                         {

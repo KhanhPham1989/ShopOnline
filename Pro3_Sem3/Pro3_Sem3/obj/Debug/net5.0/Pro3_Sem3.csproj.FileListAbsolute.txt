@@ -1001,7 +1001,6 @@ C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\Details.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\EditInfomation.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\GetAllPayment.cshtml.g.cs
-C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\Index.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\Login.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\MenuDetails.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\MenuDetails2.cshtml.g.cs
@@ -1017,4 +1016,10 @@ C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\ref\Pr
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Pro3_Sem3.pdb
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Pro3_Sem3.genruntimeconfig.cache
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Pro3_Sem3.csproj.AssemblyReference.cache
+C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Caterer\EditCaterer.cshtml.g.cs
+C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Caterer\GetAllPayment.cshtml.g.cs
+C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Caterer\Register.cshtml.g.cs
+C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Home\AboutUs.cshtml.g.cs
+C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Home\ContactUs.cshtml.g.cs
+C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\Home\ThankYou.cshtml.g.cs
 C:\Users\Khanh\Desktop\IT\ShopOnline\Pro3_Sem3\Pro3_Sem3\obj\Debug\net5.0\Razor\Views\User\GetPaymentDetails.cshtml.g.cs

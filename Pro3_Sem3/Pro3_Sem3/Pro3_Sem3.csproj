@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="New pro\" />
+    <Folder Include="wwwroot\images\caterer\" />
     <Folder Include="wwwroot\images\food\" />
   </ItemGroup>
 

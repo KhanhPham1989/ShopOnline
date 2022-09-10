@@ -69,24 +69,32 @@ namespace Pro3_Sem3.Controllers
                 ViewBag.sms = "Delivery Date must be over than 7 days.";
             }
             var resname = db.Caterers.SingleOrDefault(x => x.Caterid == resid);
+            ViewBag.input = (resname.MaxPeople).ToString();
+            HttpContext.Session.SetString(catermaxservice, resname.MaxPeople.ToString());
             ViewBag.data = resname.Caterfullname;
             return View("page3", pay);
         }
 
         [HttpPost]
-        public IActionResult ShowPaymentBeforeGetFood(Payment payment)
+        public IActionResult ShowPaymentBeforeGetFood(Payment payment, string quanti)
         {
-            if(ModelState.IsValid)
-            {
+            var carter = int.Parse(HttpContext.Session.GetString(catermaxservice));
+           
+            if (ModelState.IsValid && int.Parse(quanti) < carter)
+            {   
                 db.Payments.Add(payment);
                 db.SaveChanges();
-
+                HttpContext.Session.SetString(quanty, quanti);
                 HttpContext.Session.SetString(payid, payment.Paymentid.ToString());
                 return RedirectToAction("Index2", payment);
             }
             else
             {
-                return BadRequest();
+                HttpContext.Session.Remove(quanti);
+                HttpContext.Session.Remove(catermaxservice);
+                HttpContext.Session.Remove(payid);
+                
+                return RedirectToAction("Index","Home");
             }
         }
 
@@ -111,6 +119,8 @@ namespace Pro3_Sem3.Controllers
         //////////////////////////////////////////
         public const string CARTKEY = "cart";
         public const string payid = "payid";
+        public const string quanty = "quanti";
+        public const string catermaxservice = "catermaxservice";
         public List<CartItem> cartItems = new List<CartItem>();
         List<CartItem> GetCartItems()
         {
@@ -144,14 +154,17 @@ namespace Pro3_Sem3.Controllers
                 .Where(p => p.Foodid == food_id)
                 .FirstOrDefault();
             var cart = GetCartItems();
+            var soluong = int.Parse(HttpContext.Session.GetString(quanty));
+          
             var cartitem = cart.Find(p => p.product.Foodid == food_id);
             if (cartitem != null)
             {
-                cartitem.quantity++;
+                
+                cartitem.quantity = (soluong / 10) ;
             }
             else
             {
-                cart.Add(new CartItem() { quantity = 1, product = product });
+                cart.Add(new CartItem() { quantity = soluong/10, product = product });
             }
             SaveCartSession(cart);
             
@@ -201,15 +214,7 @@ namespace Pro3_Sem3.Controllers
 
             return RedirectToAction(nameof(Cart));
         }
-        //[HttpGet]
-        //public IActionResult RemovePayment()
-        //{
-        //    //var UserID = int.Parse(HttpContext.Session.GetString("no"));
-        //    var payid2 = int.Parse(HttpContext.Session.GetString(payid));
-        //    var resurl = db.Payments.SingleOrDefault(x => x.Paymentid.Equals(payid2));
 
-        //    return View(resurl);
-        //}
         [HttpPost]
         public IActionResult RemovePayment()
         {
@@ -279,8 +284,9 @@ namespace Pro3_Sem3.Controllers
         public IActionResult Thanhtoan()
         {
             var payid2 = int.Parse(HttpContext.Session.GetString(payid));
-            ViewBag.name = HttpContext.Session.GetString("UserName");
+           // ViewBag.name = HttpContext.Session.GetString("UserName");
             var payid3 = db.Payments.Where(x => x.Paymentid == payid2).SingleOrDefault();
+           
             var total = db.PaymentDetails.Where(x => x.Paymentid.Equals(payid3.Paymentid)).ToList();
             foreach (var item in total)
             {

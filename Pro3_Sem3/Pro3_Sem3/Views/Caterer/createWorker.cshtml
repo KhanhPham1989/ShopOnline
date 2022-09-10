@@ -9,21 +9,22 @@
 
 <hr />
 <div class="row">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
         <form asp-action="createWorker" asp-controller="Caterer">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Wokername" class="control-label"></label>
+                <label class="control-label">Worker Name</label>
                 <input asp-for="Wokername" class="form-control" />
                 <span asp-validation-for="Wokername" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Workerphone" class="control-label"></label>
+                <label class="control-label">Phone</label>
                 <input asp-for="Workerphone" class="form-control" />
                 <span asp-validation-for="Workerphone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Workeraddress" class="control-label"></label>
+                <label class="control-label">Address</label>
                 <input asp-for="Workeraddress" class="form-control" />
                 <span asp-validation-for="Workeraddress" class="text-danger"></span>
             </div>
@@ -33,28 +34,24 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Workersalary" class="control-label"></label>
+                <label class="control-label">Salary</label>
                 <input asp-for="Workersalary" class="form-control" />
                 <span asp-validation-for="Workersalary" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Workertype" class="control-label"></label>
+                <label class="control-label">Position</label>
                 <input asp-for="Workertype" class="form-control" />
                 <span asp-validation-for="Workertype" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Caterid" class="control-label"></label>
+                @*<label asp-for="Caterid" class="control-label"></label>*@
                 @using Microsoft.AspNetCore.Http
-                <input value="@Context.Session.GetString("res")" readonly class="form-control" />
+                <input value="@Context.Session.GetString("res")" type="hidden" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />  &nbsp;|&nbsp;
+                <a asp-action="WorkerListOfRestaurant" asp-controller="Caterer" class="btn btn-primary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="WorkerListOfRestaurant" asp-controller="Caterer">Back to List</a>
-</div>
-

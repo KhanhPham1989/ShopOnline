@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Pro3_Sem3.ServicesIMP;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Pro3_Sem3.Controllers
 {
@@ -23,6 +24,18 @@ namespace Pro3_Sem3.Controllers
             db = _db;
             hostEnvironment = _hostEnvironment;
             ser = _ser;
+        }
+
+        public IActionResult GetAllPayment()
+        {
+            if (HttpContext.Session.GetString("res") == null)
+            {
+                return RedirectToAction("LoginRes", "Caterer");
+            }
+            var ID = int.Parse(HttpContext.Session.GetString("res"));
+            /*string s = HttpContext.Session.GetString("res");*/
+            var result = db.Payments.Where(f => f.Caterid.Equals(ID)).Include(a => a.Cus).Include(b => b.Cater).Include(x => x.Cater.Foods).ToList();
+            return View(result);
         }
 
         [HttpGet]
@@ -52,7 +65,7 @@ namespace Pro3_Sem3.Controllers
                     string extension = Path.GetExtension(fo.PhotoUpload.FileName);
                     fo.Foodimage = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                     edit.Foodimage = fo.Foodimage;
-                    string path = Path.Combine(wwwRootPath + "/images/", fileName);
+                    string path = Path.Combine(wwwRootPath + "/images/food/", fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         fo.PhotoUpload.CopyTo(fileStream);
@@ -155,7 +168,7 @@ namespace Pro3_Sem3.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(fo.PhotoUpload.FileName);
                     string extension = Path.GetExtension(fo.PhotoUpload.FileName);
                     fo.Foodimage = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/images/", fileName);
+                    string path = Path.Combine(wwwRootPath + "/images/food/", fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         fo.PhotoUpload.CopyTo(fileStream);
@@ -298,28 +311,129 @@ namespace Pro3_Sem3.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> EditCaterer()
+        {
+            var district = db.Districts.ToList();
+            ViewBag.data = new SelectList(district, "DistrictId", "DistrictName");
+            var ID = int.Parse(HttpContext.Session.GetString("res"));
+            var edit = await db.Caterers.SingleOrDefaultAsync(f => f.Caterid.Equals(ID));
+            return View(edit);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCaterer(Caterer cate, int addressDistrict)
+        {
+            var district = db.Districts.ToList();
+            ViewBag.data = new SelectList(district, "DistrictId", "DistrictName");
+
+            var ID = int.Parse(HttpContext.Session.GetString("res"));
+            var edit = await db.Caterers.SingleOrDefaultAsync(f => f.Caterid.Equals(ID));
+
+            var imagePath = Path.Combine(hostEnvironment.WebRootPath, "images", edit.Photo);
+            if (cate.PhotoUpload != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    //xóa file ảnh
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                    //Save image to wwwroot/images
+                    string wwwRootPath = hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(cate.PhotoUpload.FileName);
+                    string extension = Path.GetExtension(cate.PhotoUpload.FileName);
+                    cate.Photo = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    edit.Photo = cate.Photo;
+                    string path = Path.Combine(wwwRootPath + "/images/caterer/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        cate.PhotoUpload.CopyTo(fileStream);
+                    }
+                    edit.Caterpasss = cate.Caterpasss;
+                    edit.Caterfullname = cate.Caterfullname;
+                    edit.Cateraddress = cate.Cateraddress;
+                    edit.Caterphone = cate.Caterphone;
+                    edit.Caterstatus = cate.Caterstatus;
+                    edit.Cateremail = cate.Cateremail;
+                    edit.DistrictId = addressDistrict;
+                    edit.MaxPeople = cate.MaxPeople;
+
+                    //insert
+                    db.Entry(edit).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+            }
+            else
+            {
+                edit.Caterpasss = cate.Caterpasss;
+                edit.Caterfullname = cate.Caterfullname;
+                edit.Cateraddress = cate.Cateraddress;
+                edit.Caterphone = cate.Caterphone;
+                edit.Caterstatus = cate.Caterstatus;
+                edit.Cateremail = cate.Cateremail;
+                edit.DistrictId = addressDistrict;
+                edit.MaxPeople = cate.MaxPeople;
+
+                //insert
+                db.Entry(edit).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
         public IActionResult Register()
         {
-
+            var district = db.Districts.ToList();
+            ViewBag.data = new SelectList(district, "DistrictId", "DistrictName");
             return View();
         }
         [HttpPost]
-        public IActionResult Register(Caterer Newcarter)
+        public IActionResult Register(Caterer Newcarter, int addressDistrict)
         {
+            var district = db.Districts.ToList();
+            ViewBag.data = new SelectList(district, "DistrictId", "DistrictName");
+
             var models = db.Caterers.SingleOrDefault(n => n.Catername.Equals(Newcarter.Catername));
+
             if (models != null && models.Caterfullname.Equals(Newcarter.Caterfullname))
             {
-                ViewBag.msg = "This email has been register!!";
-                return RedirectToAction("Register");
+                ViewBag.msg = "This username has been register !!!";
+                return RedirectToAction("Register", "Caterer");
             }
             else
             {
                 if (ModelState.IsValid)
                 {
-                    db.Caterers.Add(Newcarter);
+                    //Save image to wwwroot/images
+                    string wwwRootPath = hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(Newcarter.PhotoUpload.FileName);
+                    string extension = Path.GetExtension(Newcarter.PhotoUpload.FileName);
+                    Newcarter.Photo = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string path = Path.Combine(wwwRootPath + "/images/caterer/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        Newcarter.PhotoUpload.CopyTo(fileStream);
+                    }
+                    Caterer newCat = new Caterer()
+                    {
+                        Catername = Newcarter.Catername,
+                        Caterpasss = Newcarter.Caterpasss,
+                        Caterfullname = Newcarter.Caterfullname,
+                        Cateraddress = Newcarter.Cateraddress,
+                        Caterphone = Newcarter.Caterphone,
+                        Photo = Newcarter.Photo,
+                        Caterstatus = true,
+                        Cateremail = Newcarter.Cateremail,
+                        DistrictId = addressDistrict,
+                        MaxPeople = Newcarter.MaxPeople
+                    };
+                    //insert
+                    db.Caterers.AddAsync(newCat);
                     db.SaveChanges();
-                    ViewBag.msg = "Register Successfull!! Please Login.";
-                    return RedirectToAction("Login","User");
+                    ViewBag.msg = "Register Successfull <3";
+                    return RedirectToAction("LoginRes", "Caterer");
                 }
                 return View();
             }

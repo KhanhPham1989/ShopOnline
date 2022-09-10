@@ -90,13 +90,11 @@
                                 @using Microsoft.AspNetCore.Http
                                 @if (Context.Session.GetString("no") == null)
                                 {
-                                    <li><a href='@Url.Action("Login", "User")' onclick="return confirm('You need to login to Add wishlist!!')"><i class="fa fa-star"></i> Wish List</li>
-                                }
-                                @using Pro3_Sem3.Controllers
-                                @if (Context.Session.GetString(CartController.CARTKEY) != null)
-                                {
-                                     <li>
-                                        @await Html.PartialAsync("_CartPartial")
+                                    <li>
+                                        <a href='@Url.Action("Login", "User")' onclick="return confirm('You need to login to Add wishlist!!')">
+                                            <i class="fa fa-star"></i> Wish List
+
+                                        </a>
                                     </li>
                                 }
                                 else
@@ -105,6 +103,10 @@
                                     <li>
                                         <a href='@Url.Action("WishList", "Home")'>
                                             <i class="fa fa-star"></i> Wish List
+                                            @if (ViewBag.wlcount != null)
+                                            {
+                                                <span style="border: 1px solid red;border-radius: 25px; font-size: 80%; color: white; background-color: red; margin-bottom: 20px; padding: 2px;">@ViewBag.wlcount</span>
+                                            }
 
 
                                         </a>
@@ -113,8 +115,10 @@
 
 
                                 <li>
-                                    <a href="">
-                                        <i class="fa fa-shopping-cart"></i> Cart
+                                    <a href='@Url.Action("Cart","Cart")'>
+                                        <i class="fa fa-shopping-cart"></i> Cart @await Html.PartialAsync("_CartPartial")
+
+                                       
 
                                     </a>
                                 </li>
@@ -150,7 +154,7 @@
                                             <b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu extended logout">
-                                            <li style="display:block " ><a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Details">Account Information</a></li>
+                                            <li style="display:block"><a href='@Url.Action("Details", "User")'>Account</a></li>
                                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
 
                                         </ul>
@@ -192,8 +196,8 @@
                                         <li><a href="blog-single.html">Blog Single</a></li>
                                     </ul>
                                 </li>  -->
-                                <li><a href="">Contact Us</a></li>
-                                <li><a href="">About Us</a></li>
+                                <li><a href="@Url.Action("ConTactUs", "Home")">Contact Us</a></li>
+                                <li><a href="@Url.Action("AboutUs", "Home")">About Us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -202,9 +206,8 @@
 
                             <div class="search_box pull-right">
                                 <input type="text" name="keyword" placeholder="Search..." />-->
-
-                                <!-- <input type="submit" class="fa fa-search" value="Tìm"> -->
-                            <!--</div>
+                    <!-- <input type="submit" class="fa fa-search" value="Tìm"> -->
+                    <!--</div>
                         </form>
 
                     </div>-->
@@ -259,11 +262,11 @@
                         </div>
 
                         @*<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>*@
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>*@
                     </div>
 
                 </div>
@@ -288,7 +291,7 @@
         </div>
     </section>
 
-    <footer id="footer">
+    <footer id="footer" style="margin-top:100px">
         <!--Footer-->
 
 
@@ -325,7 +328,7 @@
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="#">Recruit</a></li>
                                 <li><a href="#">Caterer</a></li>
-                                
+
                                 <!-- <li><a href="#">Billing System</a></li>
                                 <li><a href="#">Ticket System</a></li> -->
                             </ul>
@@ -371,7 +374,7 @@
 
     </footer>
     <!--/Footer-->
-    
+
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
@@ -381,7 +384,7 @@
     <script src="~/js/price-range.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
     <script src="~/js/main.js"></script>
-
+    <script src="~/js/food.js"></script>
 </body>
 </html>
 

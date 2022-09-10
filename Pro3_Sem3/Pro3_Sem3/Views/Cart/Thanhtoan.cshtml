@@ -15,13 +15,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Paymentid" />
             <div class="form-group">
-                <label asp-for="OrderDate" class="control-label"></label>
+                <label asp-for="OrderDate" class="control-label">Order Date</label>
                 <input asp-for="OrderDate" class="form-control" />
                 <span asp-validation-for="OrderDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cusid" class="control-label"></label>
-                <input readonly asp-for="Cusid" class="form-control" />@ViewBag.name
+                <label class="control-label">Resturant</label>
+                <input readonly asp-for="Cusid" class="form-control" value="@ViewBag.name" /> @ViewBag.name
                 <span asp-validation-for="Cusid" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -9,7 +9,7 @@
     <WebStackScaffolding_IsLayoutPageSelected>True</WebStackScaffolding_IsLayoutPageSelected>
     <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
-    <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_CatererLayout.cshtml</WebStackScaffolding_LayoutPageFile>
+    <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_Layout.cshtml</WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_DbContextTypeFullName>Pro3_Sem3.Models.DatabaseContext</WebStackScaffolding_DbContextTypeFullName>
   </PropertyGroup>
 </Project>

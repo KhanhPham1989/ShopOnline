@@ -1,65 +1,51 @@
-﻿@model IEnumerable<Pro3_Sem3.Models.Payment>
+﻿@model IEnumerable<Pro3_Sem3.Models.Food>
 
 @{
     ViewData["Title"] = "GetPaymentDetails";
-    Layout = "~/Views/Shared/_CatererLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>GetPaymentDetails</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
+                <p>#ID</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                <p>Food Name</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                <p>Quantity</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeliveryDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cater)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cus)
+                <p>Description</p>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    int stt = 1;
         <tr>
-            
             <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
+            @(stt++)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.Foodname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                <p>@ViewBag.quan</p>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeliveryDate)
+                @Html.DisplayFor(modelItem => item.Fooddescription)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Cater.Cateraddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cus.Cusaddress)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Paymentid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Paymentid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Paymentid">Delete</a>
+                <a asp-action="Index" asp-controller="Home" type="submit" value="Back to Home"
+                   class="btn btn-primary">Home</a>
             </td>
         </tr>
 }

@@ -10,6 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
+       
         <form asp-action="ShowPaymentBeforeGetFood" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group"hidden>
@@ -46,22 +47,27 @@
                 <input asp-for="DeliveryDate" class="form-control" />
                 <span asp-validation-for="DeliveryDate" class="text-danger"></span>
             </div>
-            <div  class="form-group"  >
-                <label asp-for="Orderaddress" class="control-label"></label>
+            <div class="form-group">
+                <label class="control-label">Please insert address you choose</label>
                 <input asp-for="Orderaddress" class="form-control" required />
                 <span asp-validation-for="Orderaddress" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
                 <label asp-for="Caterid" accesskey="resid" class="control-label"> </label>
-                <input hidden asp-for="Caterid" class="form-control" readonly />
+                <input type="hidden" asp-for="Caterid" class="form-control" readonly />
 
 
             </div>
             <div class="form-group">
                 <label accesskey="resid" class="control-label">You already choose @ViewBag.data Restaurant for your party</label>
-                <input hidden class="form-control" />
-
-
+                <input type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Insert Table you want to book. Your @ViewBag.data you choose can not serve over @ViewBag.input
+                 
+                </label>
+                <input type="text" min="50" max="@ViewBag.input"  class="form-control" name="quanti" required =" @ViewBag.input" />
+             
             </div>
             <div class="form-group">
 
